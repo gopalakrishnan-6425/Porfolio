@@ -35,17 +35,17 @@ src/
 - **Contact form**: submits through FormSubmit to the email in `src/data/profile.js`; the first submission requires confirming the activation email FormSubmit sends you. Visitors do not need an email app configured.
 
 ## Deploy
-### Cloudflare Pages (recommended)
+### Vercel (recommended)
 
-Connect this project to a GitHub repository using Cloudflare Pages' Git integration. Set:
+Import the GitHub repository into Vercel. The Vercel project settings should use:
 
+- Framework preset: `Vite`
 - Build command: `npm run build`
-- Build output directory: `dist`
-- Root directory: `/` (the repository root)
+- Output directory: `dist`
+- Root directory: the repository root
 
-Cloudflare will build and publish each push to the production branch. Push updates to GitHub to publish changes; pull requests and other branches can be used for previews. Keep the repository private if you do not want the source code to be public. The portfolio itself will be public once deployed.
+The root `vercel.json` rewrites app routes to `index.html`, so React Router routes continue to work when opened directly or refreshed. Once GitHub is connected, each push triggers a new deployment. Keep the repository private if you want to keep the source code private; the deployed portfolio itself is public.
 
-This is a React single-page app. Cloudflare Pages serves the app routes through its SPA fallback when there is no top-level `404.html`; the current build does not produce one.
+Cloudflare Pages is also supported with build command `npm run build` and output directory `dist`.
 
 Netlify: build command `npm run build`, publish directory `dist` (the `_redirects` file handles routing).
-Vercel: add a rewrite of `/(.*)` to `/index.html`.
