@@ -1,0 +1,80 @@
+// To switch on the Live demo / Code buttons, add links, e.g. links: { demo: 'https://...', code: 'https://github.com/...' }
+export const projects = [
+  {
+    id: "banking",
+    type: "software",
+    title: "Banking Application",
+    period: "Java",
+    preview: "bank",
+    summary:
+      "Modular platform for secure accounts, transactions and balance inquiries.",
+    bullets: [
+      "Architected a modular banking platform for account administration, transaction processing and ledger balance inquiries.",
+      "Applied encapsulation, inheritance and polymorphism for maintainability and scalability.",
+      "Added exception handling that secures transactions and blocks invalid state changes.",
+    ],
+    stack: ["Java", "OOP", "Exception handling"],
+    links: {},
+  },
+  {
+    id: "students",
+    type: "software",
+    title: "Student Management System",
+    period: "MySQL",
+    preview: "db",
+    summary: "Normalized schema with joins, stored procedures and triggers.",
+    bullets: [
+      "Designed a normalized relational schema for institutional student records, tuned for query performance.",
+      "Wrote advanced SQL, stored procedures and multi-table joins with transaction boundaries.",
+      "Used triggers and constraints to automate record verification.",
+    ],
+    stack: ["MySQL", "SQL", "Stored procedures"],
+    links: {},
+  },
+  {
+    id: "icecream",
+    type: "software",
+    title: "Ice Cream Shop Website",
+    period: "Web",
+    preview: "shop",
+    summary: "Responsive storefront with a working shopping cart.",
+    bullets: [
+      "Built a fully responsive e-commerce interface that works across devices.",
+      "Implemented cart logic: item management, state updates and live price totals.",
+      "Used Flexbox and Grid layouts with event-driven JavaScript.",
+    ],
+    stack: ["HTML", "CSS", "JavaScript", "React.js"],
+    links: {},
+  },
+  {
+    id: "guardian",
+    type: "academic",
+    title: "Silver Guardian",
+    period: "Jan 2026 – Apr 2026",
+    preview: "guard",
+    summary:
+      "IoT safety monitor with fall detection, vital signs and live GPS.",
+    bullets: [
+      "Developed firmware combining multi-sensor telemetry with real-time GPS tracking.",
+      "Optimized the telemetry pipeline from device to monitoring dashboard under strict power limits.",
+      "Authored and presented a technical research paper on the design and its safety impact.",
+    ],
+    stack: ["ESP32", "Embedded C", "IoT"],
+    links: {},
+  },
+  {
+    id: "band",
+    type: "academic",
+    title: "Distress Saviour Band",
+    period: "Sept 2025 – Nov 2025",
+    preview: "band",
+    summary: "Wearable that sends real-time emergency alerts.",
+    bullets: [
+      "Built a wireless data pipeline from wearable sensors to a remote monitoring endpoint.",
+      "Programmed manual and automatic triggers with false-alert filtering.",
+      "Validated the firmware in Proteus 8 and Keil uVision5 before deployment.",
+    ],
+    stack: ["ESP32", "Embedded C", "Sensors"],
+    links: {},
+  },
+];

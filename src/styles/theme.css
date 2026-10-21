@@ -1,0 +1,39 @@
+html[data-theme="dark"] {
+  --bg: #060612;
+  --bg2: #0e0e26;
+  --ink: #f3f3ff;
+  --mut: #9b9dc4;
+  --a: #22e6ff;
+  --b: #8b6cff;
+  --c: #f13fb4;
+  --card: rgba(13, 13, 36, 0.62);
+  --line: rgba(139, 108, 255, 0.3);
+  --glow: 0 0 26px rgba(34, 230, 255, 0.5);
+  --on: #04121a;
+  --pri: #22e6ff;
+  --g1: #c4b4ff;
+  --g2: #22e6ff;
+  --hd: rgba(6, 6, 18, 0.72);
+  --live: #3dff9a;
+}
+html[data-theme="light"] {
+  --bg: #eef4ec;
+  --bg2: #dfeadb;
+  --ink: #0c2217;
+  --mut: #3b5645;
+  --a: #0f6b45;
+  --b: #8a5d00;
+  --c: #c98a00;
+  --card: rgba(255, 255, 255, 0.9);
+  --line: rgba(15, 107, 69, 0.38);
+  --glow: 0 10px 30px rgba(15, 107, 69, 0.2), 0 0 0 1px rgba(15, 107, 69, 0.16);
+  --on: #fff;
+  --pri: #0f6b45;
+  --g1: #0f6b45;
+  --g2: #8a5d00;
+  --hd: rgba(238, 244, 236, 0.88);
+  --live: #14a35f;
+}
+html[data-theme="light"] .tog i {
+  transform: translateX(26px);
+}

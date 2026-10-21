@@ -1,0 +1,19 @@
+const P =
+  '<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--a)"/><stop offset="1" style="stop-color:var(--b)"/></linearGradient></defs>';
+export const PV = {
+  bank:
+    P +
+    '<rect x="20" y="22" width="132" height="70" rx="18" fill="url(#gb)"/><rect class="fg" x="34" y="38" width="48" height="7" rx="3.5" opacity=".7"/><rect class="fg" x="34" y="56" width="86" height="12" rx="6"/><g class="fa"><rect class="gr" x="176" y="60" width="18" height="40" rx="6"/><rect class="gr" style="animation-delay:-.6s" x="202" y="40" width="18" height="60" rx="6"/><rect class="gr" style="animation-delay:-1.2s" x="228" y="52" width="18" height="48" rx="6"/><rect class="gr" style="animation-delay:-1.8s" x="254" y="30" width="18" height="70" rx="6"/></g><rect class="sl" x="20" y="112" width="252" height="18" rx="9" fill="none" stroke-width="1.5"/><rect class="sl" x="20" y="138" width="252" height="18" rx="9" fill="none" stroke-width="1.5"/><circle class="fb pls" cx="32" cy="121" r="4"/><circle class="fa pls" cx="32" cy="147" r="4"/></svg>',
+  db:
+    P +
+    '<g class="fc sa" stroke-width="1.8"><rect x="22" y="26" width="86" height="58" rx="14"/><rect x="214" y="26" width="86" height="58" rx="14"/><rect x="118" y="108" width="86" height="58" rx="14"/></g><g class="fa"><rect x="22" y="26" width="86" height="16" rx="8"/><rect x="214" y="26" width="86" height="16" rx="8"/><rect x="118" y="108" width="86" height="16" rx="8"/></g><g class="fl"><rect x="34" y="52" width="50" height="5" rx="2.5"/><rect x="34" y="64" width="38" height="5" rx="2.5"/><rect x="226" y="52" width="50" height="5" rx="2.5"/><rect x="226" y="64" width="34" height="5" rx="2.5"/><rect x="130" y="134" width="50" height="5" rx="2.5"/></g><path class="sb fw" d="M108 56h106M64 84v36q0 6 6 6h48M258 84v36q0 6-6 6h-48" fill="none" stroke-width="2.5"/></svg>',
+  shop:
+    P +
+    '<ellipse class="fl" cx="160" cy="160" rx="70" ry="8"/><path class="fa" d="M124 84h72l-36 74z"/><path class="sg" d="M136 100l24 40M160 90l0 60M184 100l-24 40" stroke-width="2" opacity=".5" fill="none"/><g class="bob"><circle class="fb" cx="160" cy="64" r="26"/><circle fill="url(#gb)" cx="160" cy="40" r="20"/></g><rect class="sl" x="222" y="24" width="76" height="28" rx="14" fill="none" stroke-width="2"/><circle class="fa pls" cx="240" cy="38" r="6"/><rect class="fl" x="252" y="34" width="34" height="8" rx="4"/><rect class="sl" x="22" y="30" width="60" height="22" rx="11" fill="none" stroke-width="2"/><rect class="fl" x="34" y="38" width="36" height="6" rx="3"/></svg>',
+  guard:
+    P +
+    '<rect class="fl" x="130" y="6" width="60" height="42" rx="10"/><rect class="fl" x="130" y="132" width="60" height="42" rx="10"/><rect class="fc sa" x="106" y="40" width="108" height="100" rx="32" stroke-width="3"/><path class="sb fw" d="M122 92h18l8-22 14 44 10-30 8 8h20" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><g class="bob"><path class="fa" d="M248 52a14 14 0 0 1 28 0c0 12-14 28-14 28S248 64 248 52z"/><circle class="fg" cx="262" cy="52" r="5"/></g><circle class="sb pls" cx="60" cy="90" r="22" fill="none" stroke-width="2"/><circle class="fa" cx="60" cy="90" r="6"/></svg>',
+  band:
+    P +
+    '<ellipse class="fl" cx="160" cy="168" rx="80" ry="7"/><path class="fc sa" d="M70 90c0-44 40-60 90-60s90 16 90 60-40 60-90 60-90-16-90-60z" stroke-width="3"/><circle class="fa" cx="160" cy="90" r="34"/><text class="fg" x="160" y="100" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="24">SOS</text><circle class="sb pls" cx="160" cy="90" r="46" fill="none" stroke-width="2.5"/><circle class="sa pls" style="animation-delay:-.9s" cx="160" cy="90" r="58" fill="none" stroke-width="1.8"/></svg>',
+};

@@ -1,0 +1,254 @@
+/* Slim side rail. Labels appear as small tooltips beside each icon. */
+.rail {
+  position: fixed;
+  left: 14px;
+  top: 84px;
+  bottom: 16px;
+  width: 68px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 10px;
+  border-radius: 26px;
+  border: 1px solid var(--line);
+  background: var(--hd);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--glow);
+  --sp: 0;
+  --h: 44px;
+  --g: 6px;
+}
+
+/* profile ring with scroll progress */
+.rh {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex: none;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.rg {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+}
+.rg svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.rg circle {
+  fill: none;
+  stroke-width: 3;
+}
+.rg .t {
+  stroke: var(--line);
+}
+.rg .p {
+  stroke: var(--a);
+  stroke-linecap: round;
+  stroke-dasharray: 138.2px;
+  stroke-dashoffset: calc(138.2px * (1 - var(--sp)));
+  filter: drop-shadow(0 0 4px var(--a));
+}
+.rg b {
+  font: 700 9px "Space Grotesk";
+  letter-spacing: -0.06em;
+  color: var(--a);
+}
+
+/* navigation with a sliding active indicator */
+.rn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+.rl {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--g);
+  --i: 0;
+}
+.ind {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--h);
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--a) 20%, transparent),
+    color-mix(in srgb, var(--b) 20%, transparent)
+  );
+  border: 1px solid color-mix(in srgb, var(--a) 55%, transparent);
+  box-shadow: var(--glow);
+  transform: translateY(calc(var(--i) * (var(--h) + var(--g))));
+  transition: transform 0.5s cubic-bezier(0.5, -0.3, 0.3, 1.3);
+}
+.ri {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--h);
+  width: 100%;
+  padding: 0;
+  border-radius: 14px;
+  color: var(--mut);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.ri i {
+  display: grid;
+}
+.ri svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ri:hover,
+.ri.on {
+  color: var(--a);
+}
+
+/* tooltips: solid, so the page never shows through */
+.ri span,
+.rh > div:not(.rg) {
+  position: absolute;
+  left: calc(100% + 22px);
+  top: 50%;
+  transform: translate(-8px, -50%);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  box-shadow: var(--glow);
+  color: var(--ink);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+  z-index: 5;
+}
+.ri span {
+  font:
+    500 11px "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.rh > div:not(.rg) {
+  padding: 8px 16px;
+  border-radius: 18px;
+}
+.rh strong {
+  display: block;
+  font: 600 14px/1.2 "Space Grotesk";
+}
+.rh small {
+  font:
+    400 10.5px "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mut);
+}
+.ri:hover span,
+.ri:focus-visible span,
+.rh:hover > div:not(.rg) {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+/* quick links */
+.rf {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.rf .ri {
+  height: 38px;
+}
+.rf .ri svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  stroke: none;
+}
+
+@media (max-height: 820px) {
+  .rf {
+    display: none;
+  }
+}
+@media (max-height: 660px) {
+  .rail {
+    --h: 36px;
+    --g: 4px;
+  }
+}
+
+/* phones: bottom dock */
+@media (max-width: 900px) {
+  .rail {
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    width: auto;
+    height: 64px;
+    flex-direction: row;
+    padding: 6px;
+    border-radius: 22px;
+  }
+  .rh,
+  .rf {
+    display: none;
+  }
+  .rn {
+    display: block;
+    flex: 1;
+  }
+  .rl {
+    flex-direction: row;
+    gap: 0;
+    height: 100%;
+  }
+  .ind {
+    width: calc(100% / var(--n));
+    height: 100%;
+    transform: translateX(calc(var(--i) * 100%));
+  }
+  .ri {
+    flex: 1;
+    width: auto;
+    height: 100%;
+  }
+  .ri span {
+    display: none;
+  }
+}

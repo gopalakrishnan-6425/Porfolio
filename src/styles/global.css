@@ -1,0 +1,1092 @@
+/* ---------- base (prefixed "gs-" to avoid Bootstrap clashes) ---------- */
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    400 17px/1.7 "Space Grotesk",
+    system-ui,
+    sans-serif;
+  overflow-x: hidden;
+  transition:
+    background 0.5s,
+    color 0.5s;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: inherit;
+}
+p {
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+:focus-visible {
+  outline: 2px solid var(--a);
+  outline-offset: 3px;
+}
+#root {
+  position: relative;
+  z-index: 1;
+}
+#bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.gs-mono,
+.gs-eyebrow,
+.gs-btn,
+.gs-chip,
+.gs-when,
+.gs-links a,
+.gs-link {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* ---------- top bar: a floating pill ---------- */
+.gs-nav {
+  position: fixed;
+  top: 12px;
+  left: 14px;
+  right: 14px;
+  z-index: 30;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 0 16px 0 22px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--hd);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--glow);
+  overflow: hidden;
+}
+.gs-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+  font: 700 16px "Space Grotesk";
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.gs-brand:before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--a);
+  box-shadow: 0 0 12px var(--a);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+.gs-links {
+  display: flex;
+  gap: 2px;
+}
+.gs-links a {
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mut);
+  transition: 0.25s;
+}
+.gs-links a:hover {
+  color: var(--ink);
+  background: var(--line);
+}
+.gs-links a.active {
+  color: var(--on);
+  background: var(--pri);
+}
+.gs-prog {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--c), var(--b), var(--a));
+}
+.gs-tog {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg2);
+  cursor: pointer;
+  flex: none;
+  padding: 0;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+.gs-tog:hover {
+  border-color: var(--a);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--a) 35%, transparent);
+  transform: translateY(-1px);
+}
+.gs-tog:focus-visible {
+  outline: 2px solid var(--a);
+  outline-offset: 3px;
+}
+.gs-theme-mark {
+  display: block;
+  width: 29px;
+  height: 25px;
+  transition: transform 0.3s ease;
+}
+.gs-tog:hover .gs-theme-mark {
+  transform: scale(1.08) rotate(-3deg);
+}
+.gs-theme-mark-bat {
+  fill: var(--a);
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--a) 55%, transparent));
+}
+.gs-theme-mark-bat .gs-bat-eye {
+  fill: var(--bg);
+  filter: none;
+}
+.gs-theme-mark-armor {
+  width: 27px;
+  height: 27px;
+  filter: drop-shadow(0 2px 3px rgba(118, 49, 0, 0.28));
+}
+.gs-armor-shell {
+  fill: #c8332a;
+  stroke: #f2bd41;
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+.gs-armor-face {
+  fill: #f2bd41;
+  stroke: #9f681a;
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+}
+.gs-armor-eye {
+  fill: #d9fbff;
+  filter: drop-shadow(0 0 2px #38dfff);
+}
+
+/* ---------- layout ---------- */
+.gs-main {
+  margin-left: 96px;
+  padding: 100px clamp(16px, 4vw, 48px) 40px;
+  min-height: 100vh;
+}
+.gs-page {
+  animation: gsPage 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.gs-section {
+  padding: 30px 0;
+}
+.gs-beyond-lead {
+  max-width: 760px;
+  margin: -8px 0 30px;
+  color: var(--mut);
+  font: 400 clamp(16px, 1.8vw, 20px)/1.65 "Space Grotesk", sans-serif;
+}
+.gs-beyond-grid {
+  margin-bottom: 26px;
+}
+.gs-beyond-card {
+  min-height: 228px;
+  padding: 24px;
+  border-radius: 34px 34px 34px 12px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.gs-beyond-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--a) 60%, transparent);
+}
+.gs-beyond-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.gs-beyond-symbol {
+  color: var(--a);
+  font: 500 28px/1 "Space Grotesk", sans-serif;
+  text-shadow: 0 0 18px color-mix(in srgb, var(--a) 45%, transparent);
+}
+.gs-beyond-number,
+.gs-beyond-kicker {
+  color: var(--mut);
+  font: 500 10px "JetBrains Mono", monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.gs-beyond-card h3 {
+  margin: 0 0 9px;
+  color: var(--ink);
+  font: 600 21px/1.2 "Space Grotesk", sans-serif;
+}
+.gs-beyond-card p {
+  max-width: 290px;
+  margin: 0;
+  color: var(--mut);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.gs-beyond-focus {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.3fr) 1fr;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 28px;
+  border-radius: 26px 26px 26px 8px;
+}
+.gs-beyond-focus p {
+  margin: 0;
+  color: var(--ink);
+  font: 500 clamp(15px, 1.6vw, 19px)/1.5 "Space Grotesk", sans-serif;
+}
+.gs-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--a);
+}
+.gs-eyebrow:before {
+  content: "";
+  width: 36px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--a), var(--c));
+}
+.gs-heading {
+  margin-bottom: 38px;
+}
+.gs-heading h2 {
+  font-size: clamp(28px, 3.8vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-top: 14px;
+}
+.gs-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.gs-reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- hero ---------- */
+.gs-hero {
+  position: relative;
+  min-height: calc(100vh - 150px);
+  display: flex;
+  align-items: center;
+}
+.gs-h1 {
+  font-size: clamp(40px, 6vw, 86px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 24px 0;
+}
+.gs-w {
+  display: inline-block;
+  animation: gsUp 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.gs-g {
+  background: linear-gradient(90deg, var(--g1), var(--g2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 0.08em;
+}
+.gs-role {
+  font:
+    500 clamp(15px, 1.7vw, 20px) "JetBrains Mono",
+    monospace;
+  color: var(--a);
+  min-height: 34px;
+  margin-bottom: 12px;
+}
+.gs-lead {
+  color: var(--mut);
+  max-width: 52ch;
+  font-size: clamp(16px, 1.5vw, 19px);
+  margin-bottom: 32px;
+}
+.gs-lead b {
+  color: var(--ink);
+  font-weight: 500;
+}
+.gs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.gs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  border-radius: 999px;
+  border: 1.5px solid var(--c);
+  background: transparent;
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.gs-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 26px color-mix(in srgb, var(--c) 38%, transparent);
+  color: var(--ink);
+}
+.gs-btn.primary {
+  background: linear-gradient(
+    135deg,
+    var(--pri),
+    color-mix(in srgb, var(--pri) 50%, var(--b))
+  );
+  color: var(--on);
+  border-color: transparent;
+  box-shadow: var(--glow);
+}
+.gs-btn.primary:hover {
+  color: var(--on);
+}
+.gs-soc {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.gs-soc a {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: #161b22;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: 0.3s;
+}
+.gs-soc svg {
+  width: 24px;
+  height: 24px;
+}
+.gs-soc a:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: var(--glow);
+}
+
+/* ---------- profile coin ---------- */
+:root {
+  --shk: 48%;
+  --coin-edge: #c2a665;
+  --coin-enamel: #123828;
+  --coin-shadow: #0a2017;
+  --coin-border: #2a6547;
+  --coin-inset: #a98e50;
+  --coin-text: #eef4ee;
+  --coin-metal-shadow: #51452d;
+}
+[data-theme="light"] {
+  --shk: 30%;
+  --coin-enamel: #84211f;
+  --coin-shadow: #3a1214;
+  --coin-border: #9c2925;
+  --coin-inset: #d2aa51;
+  --coin-text: #fff7f2;
+  --coin-metal-shadow: #6b2221;
+}
+.gs-coin-stage {
+  position: relative;
+  width: min(340px, 80vw);
+  height: 460px;
+  margin: 0 auto;
+  transform: translate(-52px, -64px);
+  perspective: 1100px;
+  --pointer-x: 50%;
+  --pointer-y: 45%;
+  --photo-shift-x: 0px;
+  --photo-shift-y: 0px;
+}
+@media (min-width: 901px) and (max-width: 1200px) {
+  .gs-coin-stage {
+    transform: translate(-24px, -36px);
+  }
+}
+.gs-coin-toss {
+  z-index: 3;
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  margin-left: -150px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: gsToss 14s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+.gs-coin {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: gsFlip 14s linear infinite;
+}
+.gs-rim {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    #e3d5b0 0%,
+    var(--coin-edge) 18%,
+    #927a48 34%,
+    var(--coin-metal-shadow) 50%,
+    #c6b178 68%,
+    var(--coin-metal-shadow) 84%,
+    #e4d7b5 100%
+  );
+}
+.gs-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 8px solid var(--coin-border);
+  box-shadow:
+    0 24px 42px color-mix(in srgb, #000 var(--shk), transparent),
+    inset 0 0 0 4px var(--coin-inset),
+    inset 0 0 28px color-mix(in srgb, var(--coin-shadow) 68%, transparent);
+  transition: border-color 0.45s ease, box-shadow 0.45s ease;
+}
+.gs-face:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 28%,
+    rgba(255, 255, 255, 0.04) 39%,
+    rgba(255, 255, 255, 0.32) 48%,
+    color-mix(in srgb, var(--coin-edge) 12%, transparent) 55%,
+    transparent 68%
+  );
+  background-size: 260% 100%;
+  opacity: 0;
+  z-index: 3;
+  animation: gsGloss 14s ease-in-out infinite;
+}
+.gs-front {
+  transform: translateZ(8px);
+  background: var(--bg2);
+}
+.gs-coin-stage:hover .gs-front {
+  border-color: var(--coin-edge);
+  box-shadow:
+    0 30px 52px color-mix(in srgb, #000 calc(var(--shk) + 5%), transparent),
+    0 0 22px color-mix(in srgb, var(--coin-edge) 18%, transparent),
+    inset 0 0 0 4px var(--coin-inset),
+    inset 0 0 28px color-mix(in srgb, var(--coin-shadow) 68%, transparent);
+}
+.gs-front img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 12%;
+  display: block;
+  transform: scale(1.015);
+  transition:
+    transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.45s ease;
+  filter: saturate(1.02) contrast(1.02);
+}
+.gs-coin-stage:hover .gs-front img {
+  transform: scale(1.07) translate(var(--photo-shift-x), var(--photo-shift-y));
+  filter: saturate(1.1) contrast(1.04) brightness(1.035);
+}
+.gs-photo-glint {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at var(--pointer-x) var(--pointer-y),
+    rgba(255, 255, 255, 0.42),
+    transparent 48%
+  );
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity 0.35s ease;
+}
+.gs-coin-stage:hover .gs-photo-glint {
+  opacity: 0.82;
+}
+.gs-back {
+  transform: rotateY(180deg) translateZ(8px);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  padding: 34px;
+  background: linear-gradient(145deg, var(--coin-enamel), var(--coin-shadow));
+  color: var(--coin-text);
+}
+.gs-back b {
+  font:
+    700 60px/1 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.08em;
+  color: var(--coin-text);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.34);
+}
+.gs-back span {
+  font:
+    600 13px/1.5 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+.gs-sh {
+  position: absolute;
+  left: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.gs-sh.soft {
+  bottom: 45px;
+  width: 300px;
+  height: 60px;
+  margin-left: -150px;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, #000 var(--shk), transparent),
+    transparent 72%
+  );
+  filter: blur(18px);
+  transform-origin: center;
+  animation: gsShS 14s ease-in-out infinite;
+}
+.gs-sh.contact {
+  bottom: 57px;
+  width: 230px;
+  height: 24px;
+  margin-left: -115px;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, #000 calc(var(--shk) + 20%), transparent),
+    transparent 70%
+  );
+  filter: blur(8px);
+  transform-origin: center;
+  animation: gsShC 14s ease-in-out infinite;
+}
+.gs-cap {
+  z-index: 4;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font:
+    500 12px "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mut);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.gs-cap:before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 10px var(--live);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes gsFlip {
+  0%, 6% { transform: rotateX(0) rotateY(0) rotateZ(0); }
+  8% { transform: rotateX(-5deg) rotateY(0) rotateZ(-5deg); }
+  27.5% {
+    transform: rotateX(14deg) rotateY(1296deg) rotateZ(-12deg);
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  32.5% { transform: rotateX(0) rotateY(1440deg) rotateZ(0); }
+  35% { transform: rotateX(-3deg) rotateY(1440deg) rotateZ(2deg); }
+  38% { transform: rotateX(1deg) rotateY(1440deg) rotateZ(0.5deg); }
+  43%, 100% { transform: rotateX(0) rotateY(1440deg) rotateZ(0); }
+}
+@keyframes gsToss {
+  0%, 6%, 43%, 100% { transform: translate(0, -4px) scale(1) rotateZ(0); }
+  8% { transform: translate(0, 2px) scale(0.98) rotateZ(-3deg); }
+  14.3% { transform: translate(-4px, -98px) scale(0.82) rotateZ(-11deg); }
+  23% { transform: translate(-2px, -55px) scale(0.9) rotateZ(-6deg); }
+  32.5% { transform: translate(2px, 9px) scale(1.045) rotateZ(5deg); }
+  35% { transform: translate(0, -4px) scale(0.99) rotateZ(-2deg); }
+  38% { transform: translate(0, -2px) scale(1) rotateZ(0); }
+}
+@keyframes gsShC {
+  0%, 6%, 43%, 100% { transform: scale(1, 1); opacity: 0.82; filter: blur(8px); }
+  14.3% { transform: scale(0.62, 0.76); opacity: 0.28; filter: blur(14px); }
+  27.5% { transform: scale(0.76, 0.82); opacity: 0.42; filter: blur(11px); }
+  32.5% { transform: scale(1.12, 0.76); opacity: 0.94; filter: blur(7px); }
+  35% { transform: scale(0.96, 1.04); opacity: 0.82; filter: blur(8px); }
+  38% { transform: scale(1, 1); opacity: 0.82; filter: blur(8px); }
+}
+@keyframes gsShS {
+  0%, 6%, 43%, 100% { transform: scale(1, 1); opacity: 0.75; filter: blur(18px); }
+  14.3% { transform: scale(0.7, 0.82); opacity: 0.3; filter: blur(25px); }
+  27.5% { transform: scale(0.82, 0.9); opacity: 0.42; filter: blur(21px); }
+  32.5% { transform: scale(1.08, 0.88); opacity: 0.9; filter: blur(16px); }
+  35% { transform: scale(0.98, 1.03); opacity: 0.76; filter: blur(18px); }
+  38% { transform: scale(1, 1); opacity: 0.75; filter: blur(18px); }
+}
+@keyframes gsGloss {
+  0%, 6%, 43%, 100% { background-position: 160% 0; opacity: 0; }
+  10% { opacity: 0.22; }
+  19% { background-position: -60% 0; opacity: 0.92; }
+  32.5% { opacity: 0.42; }
+  38% { background-position: -60% 0; opacity: 0; }
+}
+@media (max-width: 900px) {
+  .gs-coin-stage {
+    height: 410px;
+    transform: none;
+  }
+  .gs-coin-toss {
+    z-index: 3;
+    width: 240px;
+    height: 240px;
+    margin-left: -120px;
+    top: 70px;
+  }
+  .gs-sh.soft {
+    bottom: 44px;
+    width: 250px;
+    margin-left: -125px;
+  }
+  .gs-sh.contact {
+    bottom: 56px;
+    width: 170px;
+    margin-left: -85px;
+  }
+  .gs-back b {
+    font-size: 52px;
+  }
+}
+
+/* ---------- soft, rounded surfaces ---------- */
+.gs-card {
+  position: relative;
+  height: 100%;
+  padding: 30px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 36px 36px 36px 10px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    transform 0.35s,
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+.gs-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--a);
+  box-shadow: var(--glow);
+}
+.gs-card:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(
+    300px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--a) 16%, transparent),
+    transparent 70%
+  );
+}
+.gs-card:hover:before {
+  opacity: 1;
+}
+.gs-card h3 {
+  font-size: 21px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.gs-card p,
+.gs-card li {
+  color: var(--mut);
+  font-size: 16px;
+}
+.gs-card ul {
+  padding-left: 18px;
+  margin: 0;
+  display: grid;
+  gap: 9px;
+}
+.gs-card li::marker {
+  color: var(--a);
+}
+.gs-when {
+  display: block;
+  color: var(--a);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.gs-proj {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.gs-pv {
+  aspect-ratio: 16/9;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--line);
+}
+.gs-pv svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.gs-pb {
+  padding: 24px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.gs-pb .gs-chips {
+  margin-top: auto;
+  padding-top: 16px;
+}
+.gs-link {
+  align-self: flex-start;
+  margin-top: 18px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1.5px solid var(--a);
+  background: transparent;
+  color: var(--a);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.gs-link:hover {
+  background: var(--a);
+  color: var(--on);
+}
+.gs-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.gs-chip {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--bg2);
+}
+.gs-filter {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.gs-filter button {
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--mut);
+  font:
+    500 12px "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+.gs-filter button.on,
+.gs-filter button:hover {
+  background: var(--pri);
+  color: var(--on);
+  border-color: transparent;
+}
+.gs-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  padding: 1.5px;
+  background: var(--line);
+  height: 100%;
+}
+.gs-tile:before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: conic-gradient(transparent 0 70%, var(--c) 84%, var(--a));
+  animation: spin 5s linear infinite;
+}
+.gs-tile > div {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 24px 10px;
+  border-radius: 31px;
+  background: var(--bg2);
+  text-align: center;
+  font-weight: 500;
+  height: 100%;
+}
+.gs-lab {
+  font:
+    600 12px "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--a);
+  padding-top: 5px;
+}
+.gs-tl {
+  position: relative;
+  padding-left: 38px;
+}
+.gs-tl:before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(var(--a), var(--c));
+}
+.gs-tl:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: var(--a);
+  box-shadow:
+    0 0 0 6px var(--bg),
+    0 0 20px var(--c);
+}
+.gs-wave {
+  display: block;
+  width: 100%;
+  height: 90px;
+  margin: 50px 0 0;
+}
+.gs-wave path {
+  fill: var(--bg2);
+  opacity: 0.7;
+}
+.gs-cta {
+  text-align: center;
+  padding: 70px 20px;
+  background: var(--bg2);
+  border-radius: 0 0 60px 60px;
+  margin: -2px -4px 0;
+}
+.gs-cta h2 {
+  font-size: clamp(28px, 4vw, 52px);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.gs-cta p {
+  color: var(--mut);
+  margin-bottom: 28px;
+}
+.gs-lk {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 4px;
+  border-bottom: 1px solid var(--line);
+  transition: 0.3s;
+}
+.gs-lk:hover {
+  color: var(--a);
+  padding-left: 10px;
+}
+.gs-lk svg {
+  width: 22px;
+  height: 22px;
+  flex: none;
+}
+.gs-lk span {
+  margin-left: auto;
+  font:
+    400 13px "JetBrains Mono",
+    monospace;
+  color: var(--mut);
+}
+.gs-mail {
+  font: 600 clamp(16px, 2.2vw, 24px) "Space Grotesk";
+  display: inline-block;
+  margin: 8px 0 6px;
+  border-bottom: 3px solid var(--c);
+  word-break: break-all;
+}
+.gs-input {
+  background: var(--bg2) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 22px !important;
+  color: var(--ink) !important;
+  padding: 14px 20px !important;
+}
+.gs-input:focus {
+  border-color: var(--a) !important;
+  box-shadow: var(--glow) !important;
+}
+.form-label {
+  font:
+    500 12px "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mut);
+}
+.gs-modal {
+  background: var(--hd);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--line);
+  border-radius: 36px;
+  color: var(--ink);
+  overflow: hidden;
+}
+.gs-modal .modal-header {
+  border-color: var(--line);
+  padding: 22px 28px;
+}
+.gs-modal .modal-body {
+  padding: 0;
+}
+.gs-modal .gs-pb {
+  padding: 26px 30px 30px;
+}
+.gs-foot {
+  margin-left: 96px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--mut);
+  font:
+    400 12px "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- motion ---------- */
+@keyframes gsPage {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.99);
+  }
+}
+@keyframes gsUp {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1200px) {
+  .gs-links {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  .gs-main,
+  .gs-foot {
+    margin-left: 0;
+  }
+  .gs-main {
+    padding-bottom: 120px;
+  }
+  .gs-nav {
+    left: 10px;
+    right: 10px;
+  }
+  .gs-hero {
+    min-height: 0;
+    padding-bottom: 50px;
+  }
+  .gs-beyond-focus {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+  .gs-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
