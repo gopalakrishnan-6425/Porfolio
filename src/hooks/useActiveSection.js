@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { routes } from "../data/routes.js";
 
-/** Tracks the section near the middle of the viewport for both nav systems. */
+/** Keeps the navbar and mobile dock in sync with the section being read. */
 export default function useActiveSection() {
   const [active, setActive] = useState("home");
 
@@ -10,21 +10,45 @@ export default function useActiveSection() {
       .map(({ id }) => document.getElementById(id))
       .filter(Boolean);
 
-    if (!("IntersectionObserver" in window)) return undefined;
+    if (!targets.length) return undefined;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const current = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    let frame = 0;
+    const update = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const readingLine = Math.max(
+          96,
+          Math.min(window.innerHeight * 0.36, window.innerHeight - 140),
+        );
+        let current = targets[0].id;
 
-        if (current) setActive(current.target.id);
-      },
-      { rootMargin: "-32% 0px -56% 0px", threshold: [0, 0.15, 0.35, 0.6] },
-    );
+        for (const target of targets) {
+          if (target.getBoundingClientRect().top > readingLine) break;
+          current = target.id;
+        }
 
-    targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
+        const pageBottom = Math.max(
+          document.documentElement.scrollHeight,
+          document.body.scrollHeight,
+        );
+        if (window.scrollY + window.innerHeight >= pageBottom - 8) {
+          current = targets[targets.length - 1].id;
+        }
+
+        setActive((previous) => (previous === current ? previous : current));
+      });
+    };
+
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   return active;

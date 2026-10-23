@@ -45,10 +45,7 @@ export default function Navbar() {
   return (
     <header className="gs-nav">
       <a href="#home" className="gs-brand" aria-label={profile.brand}>
-        <span className="gs-brand-full">{profile.brand}</span>
-        <span className="gs-brand-compact" aria-hidden="true">
-          GOKI
-        </span>
+        {profile.brand}
       </a>
       <span className="gs-nav-divider" aria-hidden="true" />
       <div className="gs-nav-section" aria-live="polite" aria-atomic="true">
@@ -69,7 +66,7 @@ export default function Navbar() {
             key={label}
             className={`gs-nav-social-link ${className}`}
             href={href}
-            aria-label={label === "Email" ? "Compose an email in Gmail" : label}
+            aria-label={label === "Email" ? `Open Gmail compose to ${profile.email}` : label}
             title={label}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}

@@ -94,9 +94,6 @@ h4 {
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
-.gs-brand-compact {
-  display: none;
-}
 .gs-brand:before {
   content: "";
   width: 9px;
@@ -643,20 +640,20 @@ h4 {
 .gs-face:after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -30%;
   pointer-events: none;
   background: linear-gradient(
-    115deg,
-    transparent 28%,
-    rgba(255, 255, 255, 0.04) 39%,
-    rgba(255, 255, 255, 0.32) 48%,
-    color-mix(in srgb, var(--coin-edge) 12%, transparent) 55%,
-    transparent 68%
+    105deg,
+    transparent 40%,
+    color-mix(in srgb, var(--coin-highlight) 15%, transparent) 46%,
+    rgba(255, 255, 255, 0.8) 50%,
+    color-mix(in srgb, var(--coin-neon-secondary) 25%, transparent) 54%,
+    transparent 60%
   );
-  background-size: 260% 100%;
   opacity: 0;
   z-index: 3;
-  animation: gsGloss 14s ease-in-out infinite;
+  transform: translate3d(-70%, 0, 0);
+  animation: gsGloss 14s ease-out infinite;
 }
 .gs-neon-outline {
   position: absolute;
@@ -673,7 +670,7 @@ h4 {
     drop-shadow(0 0 3px var(--coin-neon-primary))
     drop-shadow(0 0 8px color-mix(in srgb, var(--coin-neon-secondary) 62%, transparent));
   transition: opacity 0.4s ease, filter 0.4s ease;
-  animation: gsNeonPulse 4.8s ease-in-out infinite;
+  animation: gsNeonPulse 14s ease-in-out infinite;
 }
 .gs-neon-front {
   transform: translateZ(3.2px);
@@ -864,22 +861,24 @@ h4 {
 @keyframes gsToss {
   0%, 6%, 43%, 100% { transform: translate3d(0, -4px, 0) scale(1) rotateZ(0); }
   8% { transform: translate3d(0, 2px, 0) scale(0.98) rotateZ(-3deg); }
-  14.3% { transform: translate3d(-4px, -98px, 0) scale(0.82) rotateZ(-11deg); }
-  23% { transform: translate3d(-2px, -55px, 0) scale(0.9) rotateZ(-6deg); }
-  32.5% { transform: translate3d(2px, 9px, 0) scale(1.045) rotateZ(5deg); }
+  14.3% { transform: translate3d(-4px, -98px, 0) scale(0.76) rotateZ(-11deg); }
+  23% { transform: translate3d(-2px, -55px, 0) scale(0.88) rotateZ(-6deg); }
+  32.5% { transform: translate3d(2px, 9px, 0) scale(1.08) rotateZ(5deg); }
   35% { transform: translate3d(0, -4px, 0) scale(0.99) rotateZ(-2deg); }
   38% { transform: translate3d(0, -2px, 0) scale(1) rotateZ(0); }
 }
 @keyframes gsFlip {
   0%, 6% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
   8% { transform: rotateX(-5deg) rotateY(0deg) rotateZ(-5deg); }
-  27.5% {
-    transform: rotateX(14deg) rotateY(1296deg) rotateZ(-12deg);
-    animation-timing-function: cubic-bezier(0.3, 0.69, 0.8, 1);
+  14% { transform: rotateX(5deg) rotateY(360deg) rotateZ(-4deg); }
+  20% { transform: rotateX(-4deg) rotateY(720deg) rotateZ(4deg); }
+  26% {
+    transform: rotateX(5deg) rotateY(1080deg) rotateZ(-3deg);
+    animation-timing-function: cubic-bezier(0.22, 0.72, 0.3, 1);
   }
   32.5% { transform: rotateX(0deg) rotateY(1440deg) rotateZ(0deg); }
-  35% { transform: rotateX(-3deg) rotateY(1440deg) rotateZ(2deg); }
-  38% { transform: rotateX(1deg) rotateY(1440deg) rotateZ(0.5deg); }
+  35% { transform: rotateX(-2deg) rotateY(1440deg) rotateZ(1deg); }
+  38% { transform: rotateX(0deg) rotateY(1440deg) rotateZ(0deg); }
   43%, 100% { transform: rotateX(0deg) rotateY(1440deg) rotateZ(0deg); }
 }
 @keyframes gsShC {
@@ -915,15 +914,14 @@ h4 {
   38% { transform: scale(1, 1); opacity: 0.75; }
 }
 @keyframes gsGloss {
-  0%, 6%, 43%, 100% { background-position: 160% 0; opacity: 0; }
-  10% { opacity: 0.22; }
-  19% { background-position: -60% 0; opacity: 0.92; }
-  32.5% { opacity: 0.42; }
-  38% { background-position: -60% 0; opacity: 0; }
+  0%, 38%, 43%, 100% { transform: translate3d(-70%, 0, 0); opacity: 0; }
+  40% { opacity: 0.5; }
+  42% { transform: translate3d(70%, 0, 0); opacity: 0.9; }
+  42.5% { opacity: 0; }
 }
 @keyframes gsNeonPulse {
-  0%, 100% { opacity: 0.76; }
-  50% { opacity: 0.98; }
+  0%, 38%, 43%, 100% { opacity: 0.76; }
+  40%, 42% { opacity: 1; }
 }
 @media (max-width: 900px) {
   .gs-coin-stage {
@@ -940,9 +938,6 @@ h4 {
   }
   .gs-rim:nth-of-type(even) {
     display: none;
-  }
-  .gs-face:after {
-    animation: none;
   }
   .gs-sh.soft {
     animation-name: gsShSMobile;
@@ -1302,6 +1297,14 @@ h4 {
   .gs-nav-status { padding: 9px 11px; }
 }
 @media (max-width: 900px) {
+  html {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 76px;
+  }
+  .gs-main > section[id] {
+    scroll-snap-align: start;
+    scroll-margin-top: 76px;
+  }
   .gs-main,
   .gs-foot {
     margin-left: 0;
@@ -1327,7 +1330,7 @@ h4 {
     gap: 8px;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 760px) {
   .gs-nav {
     justify-content: space-between;
     gap: 8px;
@@ -1341,22 +1344,17 @@ h4 {
     display: none;
   }
   .gs-brand {
-    gap: 8px;
-    font-size: 14px;
-  }
-  .gs-brand-full {
-    display: none;
-  }
-  .gs-brand-compact {
-    display: inline;
+    gap: 6px;
+    font-size: clamp(10px, 2.5vw, 12px);
+    letter-spacing: -0.045em;
   }
   .gs-nav-social {
     margin-left: auto;
-    gap: 3px;
+    gap: 2px;
   }
   .gs-nav-social-link {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
   }
 }
 @media (max-width: 380px) {
@@ -1367,8 +1365,7 @@ h4 {
     padding-inline: 10px 8px;
   }
   .gs-brand {
-    gap: 7px;
-    font-size: 14px;
+    gap: 5px;
   }
   .gs-nav-social {
     gap: 1px;
@@ -1395,8 +1392,8 @@ h4 {
     padding-inline: 8px 6px;
   }
   .gs-brand {
-    gap: 5px;
-    font-size: 13px;
+    gap: 4px;
+    font-size: 9px;
   }
   .gs-nav-social-link {
     width: 24px;
@@ -1419,6 +1416,9 @@ h4 {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+  }
   * {
     animation: none !important;
     scroll-behavior: auto !important;
