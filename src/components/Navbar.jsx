@@ -28,11 +28,11 @@ const quickLinks = [
     external: true,
   },
   {
-    label: "Email",
-    href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}`,
+    label: "Contact",
+    href: "#contact",
     icon: RI.contact,
     className: "email",
-    external: true,
+    external: false,
   },
 ];
 
@@ -60,13 +60,13 @@ export default function Navbar() {
         <span className="gs-nav-status-dot" aria-hidden="true" />
         <span>Open to opportunities</span>
       </div>
-      <nav className="gs-nav-social" aria-label="Social and email links">
+      <nav className="gs-nav-social" aria-label="Social links and contact">
         {quickLinks.map(({ label, href, icon, className, external }) => (
           <a
             key={label}
             className={`gs-nav-social-link ${className}`}
             href={href}
-            aria-label={label === "Email" ? `Open Gmail compose to ${profile.email}` : label}
+            aria-label={label === "Contact" ? "Go to the Contact section" : label}
             title={label}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}

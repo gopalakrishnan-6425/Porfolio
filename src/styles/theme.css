@@ -1,5 +1,5 @@
 html[data-theme="dark"] {
-  --bg-motion-opacity: 0.3;
+  --bg-motion-opacity: 0.5;
   --bg: #060612;
   --bg2: #0e0e26;
   --ink: #f3f3ff;
@@ -18,7 +18,7 @@ html[data-theme="dark"] {
   --live: #3dff9a;
 }
 html[data-theme="light"] {
-  --bg-motion-opacity: 0.22;
+  --bg-motion-opacity: 0.5;
   --bg: #eef4ec;
   --bg2: #dfeadb;
   --ink: #0c2217;

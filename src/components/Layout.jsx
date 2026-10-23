@@ -28,7 +28,10 @@ export default function Layout() {
 
     if (targetId) {
       requestAnimationFrame(() => {
-        document.getElementById(targetId)?.scrollIntoView({ block: "start" });
+        const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth";
+        document.getElementById(targetId)?.scrollIntoView({ block: "start", behavior });
       });
     }
   }, []);
