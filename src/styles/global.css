@@ -94,6 +94,9 @@ h4 {
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
+.gs-brand-compact {
+  display: none;
+}
 .gs-brand:before {
   content: "";
   width: 9px;
@@ -582,24 +585,13 @@ h4 {
   transform-origin: center;
   animation: gsToss 14s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
 }
-.gs-coin-spin,
-.gs-coin-tilt {
+.gs-coin {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
   transform-origin: center;
   will-change: transform;
-}
-.gs-coin-spin {
-  animation: gsCoinSpin 14s linear infinite;
-}
-.gs-coin-tilt {
-  animation: gsCoinTilt 14s linear infinite;
-}
-.gs-coin {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
+  animation: gsFlip 14s linear infinite;
 }
 .gs-coin-defs {
   position: absolute;
@@ -878,25 +870,17 @@ h4 {
   35% { transform: translate3d(0, -4px, 0) scale(0.99) rotateZ(-2deg); }
   38% { transform: translate3d(0, -2px, 0) scale(1) rotateZ(0); }
 }
-@keyframes gsCoinSpin {
-  0%, 6%, 8% { transform: rotateY(0deg); }
+@keyframes gsFlip {
+  0%, 6% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  8% { transform: rotateX(-5deg) rotateY(0deg) rotateZ(-5deg); }
   27.5% {
-    transform: rotateY(1296deg);
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    transform: rotateX(14deg) rotateY(1296deg) rotateZ(-12deg);
+    animation-timing-function: cubic-bezier(0.3, 0.69, 0.8, 1);
   }
-  32.5%, 35%, 38%, 43%, 100% { transform: rotateY(1440deg); }
-}
-@keyframes gsCoinTilt {
-  0%, 6% { transform: rotateX(0deg) rotateZ(0deg); }
-  8% { transform: rotateX(-5deg) rotateZ(-5deg); }
-  27.5% {
-    transform: rotateX(14deg) rotateZ(-12deg);
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  32.5% { transform: rotateX(0deg) rotateZ(0deg); }
-  35% { transform: rotateX(-3deg) rotateZ(2deg); }
-  38% { transform: rotateX(1deg) rotateZ(0.5deg); }
-  43%, 100% { transform: rotateX(0deg) rotateZ(0deg); }
+  32.5% { transform: rotateX(0deg) rotateY(1440deg) rotateZ(0deg); }
+  35% { transform: rotateX(-3deg) rotateY(1440deg) rotateZ(2deg); }
+  38% { transform: rotateX(1deg) rotateY(1440deg) rotateZ(0.5deg); }
+  43%, 100% { transform: rotateX(0deg) rotateY(1440deg) rotateZ(0deg); }
 }
 @keyframes gsShC {
   0%, 6%, 43%, 100% { transform: scale(1, 1); opacity: 0.82; filter: blur(8px); }
@@ -913,6 +897,22 @@ h4 {
   32.5% { transform: scale(1.08, 0.88); opacity: 0.9; filter: blur(16px); }
   35% { transform: scale(0.98, 1.03); opacity: 0.76; filter: blur(18px); }
   38% { transform: scale(1, 1); opacity: 0.75; filter: blur(18px); }
+}
+@keyframes gsShCMobile {
+  0%, 6%, 43%, 100% { transform: scale(1, 1); opacity: 0.82; }
+  14.3% { transform: scale(0.62, 0.76); opacity: 0.28; }
+  27.5% { transform: scale(0.76, 0.82); opacity: 0.42; }
+  32.5% { transform: scale(1.12, 0.76); opacity: 0.94; }
+  35% { transform: scale(0.96, 1.04); opacity: 0.82; }
+  38% { transform: scale(1, 1); opacity: 0.82; }
+}
+@keyframes gsShSMobile {
+  0%, 6%, 43%, 100% { transform: scale(1, 1); opacity: 0.75; }
+  14.3% { transform: scale(0.7, 0.82); opacity: 0.3; }
+  27.5% { transform: scale(0.82, 0.9); opacity: 0.42; }
+  32.5% { transform: scale(1.08, 0.88); opacity: 0.9; }
+  35% { transform: scale(0.98, 1.03); opacity: 0.76; }
+  38% { transform: scale(1, 1); opacity: 0.75; }
 }
 @keyframes gsGloss {
   0%, 6%, 43%, 100% { background-position: 160% 0; opacity: 0; }
@@ -937,6 +937,18 @@ h4 {
     height: 248px;
     margin-left: -124px;
     top: 66px;
+  }
+  .gs-rim:nth-of-type(even) {
+    display: none;
+  }
+  .gs-face:after {
+    animation: none;
+  }
+  .gs-sh.soft {
+    animation-name: gsShSMobile;
+  }
+  .gs-sh.contact {
+    animation-name: gsShCMobile;
   }
   .gs-sh.soft {
     bottom: 44px;
@@ -1300,6 +1312,11 @@ h4 {
   .gs-nav {
     left: 10px;
     right: 10px;
+    gap: 10px;
+    padding-inline: 16px;
+  }
+  .gs-nav-status {
+    display: none;
   }
   .gs-hero {
     min-height: 0;
@@ -1312,28 +1329,29 @@ h4 {
 }
 @media (max-width: 600px) {
   .gs-nav {
-    gap: 12px;
-    padding-inline: 16px 10px;
+    justify-content: space-between;
+    gap: 8px;
+    padding-inline: 12px 10px;
   }
   .gs-nav-divider,
+  .gs-nav-section,
+  .gs-nav-spacer,
   .gs-nav-kicker,
   .gs-nav-status {
     display: none;
   }
-  .gs-nav-section {
-    min-width: 0;
+  .gs-brand {
+    gap: 8px;
+    font-size: 14px;
   }
-  .gs-nav-current {
-    gap: 6px;
-    font-size: 10px;
+  .gs-brand-full {
+    display: none;
   }
-  .gs-nav-current-label {
-    max-width: 72px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .gs-brand-compact {
+    display: inline;
   }
   .gs-nav-social {
+    margin-left: auto;
     gap: 3px;
   }
   .gs-nav-social-link {
@@ -1345,15 +1363,12 @@ h4 {
   .gs-nav {
     left: 8px;
     right: 8px;
-    gap: 6px;
+    gap: 4px;
     padding-inline: 10px 8px;
   }
   .gs-brand {
     gap: 7px;
     font-size: 14px;
-  }
-  .gs-nav-current-label {
-    max-width: 48px;
   }
   .gs-nav-social {
     gap: 1px;
@@ -1382,12 +1397,6 @@ h4 {
   .gs-brand {
     gap: 5px;
     font-size: 13px;
-  }
-  .gs-nav-current {
-    gap: 3px;
-  }
-  .gs-nav-current-label {
-    max-width: 38px;
   }
   .gs-nav-social-link {
     width: 24px;

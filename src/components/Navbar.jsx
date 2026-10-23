@@ -44,8 +44,11 @@ export default function Navbar() {
 
   return (
     <header className="gs-nav">
-      <a href="#home" className="gs-brand">
-        {profile.brand}
+      <a href="#home" className="gs-brand" aria-label={profile.brand}>
+        <span className="gs-brand-full">{profile.brand}</span>
+        <span className="gs-brand-compact" aria-hidden="true">
+          GOKI
+        </span>
       </a>
       <span className="gs-nav-divider" aria-hidden="true" />
       <div className="gs-nav-section" aria-live="polite" aria-atomic="true">

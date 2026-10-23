@@ -38,50 +38,46 @@ export default function CoinPhoto({
       <div className="gs-sh soft" />
       <div className="gs-sh contact" />
       <div className="gs-coin-toss">
-        <div className="gs-coin-spin">
-          <div className="gs-coin-tilt">
-            <div className="gs-coin">
-              <svg className="gs-coin-defs" aria-hidden="true" focusable="false">
-                <defs>
-                  <clipPath id="gokiCoinClip" clipPathUnits="objectBoundingBox">
-                    <path d={COIN_PATH} />
-                  </clipPath>
-                </defs>
-              </svg>
-              {Array.from({ length: RIM_LAYERS }, (_, i) => (
-                <div
-                  key={i}
-                  className="gs-rim"
-                  style={{
-                    transform: `translateZ(${(i - (RIM_LAYERS - 1) / 2) * 0.35}px)`,
-                  }}
-                />
-              ))}
-              <div className="gs-face gs-front">
-                <img src={photo} alt={alt} />
-                <span className="gs-photo-glint" aria-hidden="true" />
-              </div>
-              <div className="gs-face gs-back" aria-hidden="true">
-                <svg className="gs-back-outline" viewBox="0 0 1 1">
-                  <path d={COIN_PATH} transform="translate(0.035 0.035) scale(0.93)" />
-                </svg>
-                <b>GOKI</b>
-                <span>
-                  Java Full Stack
-                  <br />
-                  Developer
-                </span>
-              </div>
-              <svg
-                className="gs-neon-outline gs-neon-front"
-                viewBox="0 0 1 1"
-                aria-hidden="true"
-              >
+        <div className="gs-coin">
+          <svg className="gs-coin-defs" aria-hidden="true" focusable="false">
+            <defs>
+              <clipPath id="gokiCoinClip" clipPathUnits="objectBoundingBox">
                 <path d={COIN_PATH} />
-                <path className="gs-neon-accent" d={COIN_PATH} />
-              </svg>
-            </div>
+              </clipPath>
+            </defs>
+          </svg>
+          {Array.from({ length: RIM_LAYERS }, (_, i) => (
+            <div
+              key={i}
+              className="gs-rim"
+              style={{
+                transform: `translateZ(${(i - (RIM_LAYERS - 1) / 2) * 0.35}px)`,
+              }}
+            />
+          ))}
+          <div className="gs-face gs-front">
+            <img src={photo} alt={alt} />
+            <span className="gs-photo-glint" aria-hidden="true" />
           </div>
+          <div className="gs-face gs-back" aria-hidden="true">
+            <svg className="gs-back-outline" viewBox="0 0 1 1">
+              <path d={COIN_PATH} transform="translate(0.035 0.035) scale(0.93)" />
+            </svg>
+            <b>GOKI</b>
+            <span>
+              Java Full Stack
+              <br />
+              Developer
+            </span>
+          </div>
+          <svg
+            className="gs-neon-outline gs-neon-front"
+            viewBox="0 0 1 1"
+            aria-hidden="true"
+          >
+            <path d={COIN_PATH} />
+            <path className="gs-neon-accent" d={COIN_PATH} />
+          </svg>
         </div>
       </div>
       <span className="gs-cap">{caption}</span>
