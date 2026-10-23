@@ -1,7 +1,6 @@
 import SectionHeading from "../components/SectionHeading.jsx";
 import SpotlightCard from "../components/SpotlightCard.jsx";
 import Reveal from "../components/Reveal.jsx";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
 
 const bullets = [
   "Built a Learning Management System to run an institute\u2019s academic activities and operations.",
@@ -11,9 +10,8 @@ const bullets = [
 ];
 
 export default function Experience() {
-  useDocumentTitle("Experience");
   return (
-    <section className="gs-section">
+    <section className="gs-section" id="experience">
       <SectionHeading eyebrow="Experience" title="Hands-on, in a real team." />
       <Reveal className="gs-tl">
         <SpotlightCard>

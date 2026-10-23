@@ -1,7 +1,7 @@
 export const profile = {
   name: "GOPALAKRISHNAN S",
-  brand: "GOKI",
-  role: "Java Full Stack Developer",
+  brand: "GOPALAKRISHNAN S",
+  role: "Java Full-Stack Developer",
   location: "Chennai, Tamil Nadu",
   email: "gopalakrishnansrgy2005@gmail.com",
   phone: "+91 99406 54740",
@@ -13,7 +13,7 @@ export const profile = {
     
   },
   roles: [
-    "Java Full Stack Developer",
+    "AI-Augmented Builder",
     "Spring Boot and REST APIs",
     "React.js interfaces",
     "MySQL and data design",

@@ -1,23 +1,52 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Cosmos from "./Cosmos.jsx";
 import Navbar from "./Navbar.jsx";
 import Sidebar from "./Sidebar.jsx";
 import Footer from "./Footer.jsx";
-import ScrollToTop from "./ScrollToTop.jsx";
+import Home from "../pages/Home.jsx";
+import About from "../pages/About.jsx";
+import Skills from "../pages/Skills.jsx";
+import Experience from "../pages/Experience.jsx";
+import Projects from "../pages/Projects.jsx";
+import Beyond from "../pages/Beyond.jsx";
+import Certifications from "../pages/Certifications.jsx";
+import Contact from "../pages/Contact.jsx";
+import { routes } from "../data/routes.js";
 
 export default function Layout() {
-  const { pathname } = useLocation();
+  useEffect(() => {
+    document.title = "Gopalakrishnan S | Java Full Stack Developer";
+
+    // Keep old bookmarked route URLs working after moving to section anchors.
+    const oldPath = window.location.pathname.replace(/^\/+|\/+$/g, "");
+    const legacySection = routes.find((route) => route.id === oldPath)?.id;
+    const targetId = window.location.hash.slice(1) || legacySection;
+
+    if (legacySection && !window.location.hash) {
+      window.history.replaceState(null, "", `/#${legacySection}`);
+    }
+
+    if (targetId) {
+      requestAnimationFrame(() => {
+        document.getElementById(targetId)?.scrollIntoView({ block: "start" });
+      });
+    }
+  }, []);
+
   return (
     <>
       <Cosmos />
-      <ScrollToTop />
       <Navbar />
       <Sidebar />
       <main className="gs-main">
-        {/* the key restarts the entrance animation on every route change */}
-        <div key={pathname} className="gs-page">
-          <Outlet />
-        </div>
+        <Home />
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Beyond />
+        <Certifications />
+        <Contact />
       </main>
       <Footer />
     </>

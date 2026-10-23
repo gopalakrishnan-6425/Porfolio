@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SectionHeading from "../components/SectionHeading.jsx";
 import ProjectCard from "../components/ProjectCard.jsx";
 import ProjectModal from "../components/ProjectModal.jsx";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
 import { projects } from "../data/projects.js";
 
 const FILTERS = [
@@ -15,20 +13,13 @@ const FILTERS = [
 ];
 
 export default function Projects() {
-  useDocumentTitle("Projects");
-  const { state } = useLocation();
   const [filter, setFilter] = useState("all");
   const [open, setOpen] = useState(null);
-
-  // opened from the home page: /projects with { state: { open: id } }
-  useEffect(() => {
-    if (state?.open) setOpen(projects.find((p) => p.id === state.open) ?? null);
-  }, [state]);
 
   const list = projects.filter((p) => filter === "all" || p.type === filter);
 
   return (
-    <section className="gs-section">
+    <section className="gs-section" id="projects">
       <SectionHeading eyebrow="Projects" title="Software and academic work." />
       <div className="gs-filter" role="tablist" aria-label="Filter projects">
         {FILTERS.map(([key, label]) => (

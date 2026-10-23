@@ -4,12 +4,10 @@ import SectionHeading from "../components/SectionHeading.jsx";
 import SpotlightCard from "../components/SpotlightCard.jsx";
 import Reveal from "../components/Reveal.jsx";
 import Chips from "../components/Chips.jsx";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
 
 export default function About() {
-  useDocumentTitle("About");
   return (
-    <section className="gs-section">
+    <section className="gs-section" id="about">
       <SectionHeading
         eyebrow="About"
         title="Clean code, from database to browser."

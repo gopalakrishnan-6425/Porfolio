@@ -4,14 +4,12 @@ import SectionHeading from "../components/SectionHeading.jsx";
 import TechLogo from "../components/TechLogo.jsx";
 import Chips from "../components/Chips.jsx";
 import Reveal from "../components/Reveal.jsx";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
 import { LOGOS } from "../data/logos.js";
 import { skillGroups } from "../data/skills.js";
 
 export default function Skills() {
-  useDocumentTitle("Skills");
   return (
-    <section className="gs-section">
+    <section className="gs-section" id="skills">
       <SectionHeading eyebrow="Skills" title="The stack I build with." />
       <Row className="g-4 mb-5">
         {Object.keys(LOGOS).map((name, i) => (

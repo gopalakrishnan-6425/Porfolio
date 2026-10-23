@@ -3,7 +3,6 @@ import Col from "react-bootstrap/Col";
 import SectionHeading from "../components/SectionHeading.jsx";
 import SpotlightCard from "../components/SpotlightCard.jsx";
 import Reveal from "../components/Reveal.jsx";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
 
 const interests = [
   {
@@ -27,10 +26,8 @@ const interests = [
 ];
 
 export default function Beyond() {
-  useDocumentTitle("Beyond the Code");
-
   return (
-    <section className="gs-section gs-beyond-page">
+    <section className="gs-section gs-beyond-page" id="beyond">
       <SectionHeading
         eyebrow="Beyond the code"
         title="Curiosity keeps me moving."
@@ -39,6 +36,8 @@ export default function Beyond() {
         <p className="gs-beyond-lead">
           I care about building dependable software for everyday life. Outside
           development, cricket, books, and music keep me energized and curious.
+          I also enjoy vibe-coding early ideas with AI tools, then refining them
+          into thoughtful, dependable software.
         </p>
       </Reveal>
 

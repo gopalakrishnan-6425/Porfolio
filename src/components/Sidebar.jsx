@@ -1,5 +1,5 @@
-import { NavLink, useLocation } from "react-router-dom";
 import useScrollProgress from "../hooks/useScrollProgress.js";
+import useActiveSection from "../hooks/useActiveSection.js";
 import { profile } from "../data/profile.js";
 import { routes } from "../data/routes.js";
 import { IC, RI } from "../data/icons.js";
@@ -9,9 +9,9 @@ const cap = (s) => s[0].toUpperCase() + s.slice(1);
 
 /** Expanding side rail: progress ring, sliding active indicator, quick links. */
 export default function Sidebar() {
-  const { pathname } = useLocation();
   const progress = useScrollProgress();
-  const active = routes.findIndex((r) => r.path === pathname);
+  const activeSection = useActiveSection();
+  const active = routes.findIndex((r) => r.id === activeSection);
 
   return (
     <aside
@@ -40,16 +40,16 @@ export default function Sidebar() {
         >
           <i className="ind" style={{ opacity: active < 0 ? 0 : 1 }} />
           {routes.map((r) => (
-            <NavLink
-              key={r.path}
-              to={r.path}
-              end={r.path === "/"}
-              className={({ isActive }) => `ri${isActive ? " on" : ""}`}
+            <a
+              key={r.id}
+              href={`#${r.id}`}
+              className={`ri${activeSection === r.id ? " on" : ""}`}
               aria-label={r.label}
+              aria-current={activeSection === r.id ? "location" : undefined}
             >
               <i dangerouslySetInnerHTML={{ __html: RI[r.icon] }} />
               <span>{r.label}</span>
-            </NavLink>
+            </a>
           ))}
         </div>
       </nav>

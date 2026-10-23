@@ -5,13 +5,11 @@ import Form from "react-bootstrap/Form";
 import SectionHeading from "../components/SectionHeading.jsx";
 import SpotlightCard from "../components/SpotlightCard.jsx";
 import Reveal from "../components/Reveal.jsx";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
 import { profile } from "../data/profile.js";
 import SocialLinks from "../components/SocialLinks.jsx";
 import ResumeButton from "../components/ResumeButton.jsx";
 
 export default function Contact() {
-  useDocumentTitle("Contact");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [validated, setValidated] = useState(false);
   const [sending, setSending] = useState(false);
@@ -54,7 +52,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="gs-section">
+    <section className="gs-section" id="contact">
       <SectionHeading eyebrow="Contact" title="Let&rsquo;s work together." />
       <Row className="g-4">
         <Col lg={7}>

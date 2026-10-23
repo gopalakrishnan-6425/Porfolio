@@ -69,14 +69,15 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 12px;
   min-height: 0;
 }
 .rl {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--g);
+  display: grid;
+  flex: 1;
+  grid-template-rows: repeat(var(--n), minmax(var(--h), 1fr));
   --i: 0;
 }
 .ind {
@@ -84,7 +85,7 @@
   left: 0;
   right: 0;
   top: 0;
-  height: var(--h);
+  height: calc(100% / var(--n));
   border-radius: 14px;
   background: linear-gradient(
     135deg,
@@ -93,7 +94,7 @@
   );
   border: 1px solid color-mix(in srgb, var(--a) 55%, transparent);
   box-shadow: var(--glow);
-  transform: translateY(calc(var(--i) * (var(--h) + var(--g))));
+  transform: translateY(calc(var(--i) * 100%));
   transition: transform 0.5s cubic-bezier(0.5, -0.3, 0.3, 1.3);
 }
 .ri {
@@ -102,7 +103,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: var(--h);
+  height: 100%;
+  min-height: var(--h);
   width: 100%;
   padding: 0;
   border-radius: 14px;
@@ -232,8 +234,11 @@
   .rn {
     display: block;
     flex: 1;
+    padding-top: 0;
   }
   .rl {
+    display: flex;
+    flex: initial;
     flex-direction: row;
     gap: 0;
     height: 100%;
@@ -247,6 +252,7 @@
     flex: 1;
     width: auto;
     height: 100%;
+    min-height: 0;
   }
   .ri span {
     display: none;

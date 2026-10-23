@@ -3,14 +3,12 @@ import Col from "react-bootstrap/Col";
 import SectionHeading from "../components/SectionHeading.jsx";
 import SpotlightCard from "../components/SpotlightCard.jsx";
 import Reveal from "../components/Reveal.jsx";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
 
 const certs = ["Java Developer", "Front End Web Developer"];
 
 export default function Certifications() {
-  useDocumentTitle("Certifications");
   return (
-    <section className="gs-section">
+    <section className="gs-section" id="certifications">
       <SectionHeading eyebrow="Certifications" title="Always learning." />
       <Row className="g-4">
         {certs.map((c, i) => (
