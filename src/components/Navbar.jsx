@@ -29,10 +29,10 @@ const quickLinks = [
   },
   {
     label: "Email",
-    href: `mailto:${profile.email}`,
+    href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}`,
     icon: RI.contact,
     className: "email",
-    external: false,
+    external: true,
   },
 ];
 
@@ -66,7 +66,7 @@ export default function Navbar() {
             key={label}
             className={`gs-nav-social-link ${className}`}
             href={href}
-            aria-label={label === "Email" ? `Send an email to ${profile.email}` : label}
+            aria-label={label === "Email" ? `Send email to ${profile.email}` : label}
             title={label === "Email" ? profile.email : label}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
