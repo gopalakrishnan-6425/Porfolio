@@ -29,10 +29,10 @@ const quickLinks = [
   },
   {
     label: "Email",
-    href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}`,
+    href: "#",
     icon: RI.contact,
     className: "email",
-    external: true,
+    external: false,
   },
 ];
 
@@ -41,6 +41,37 @@ export default function Navbar() {
   const active = useActiveSection();
   const activeIndex = Math.max(0, routes.findIndex((route) => route.id === active));
   const current = routes[activeIndex];
+
+  const handleEmailClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const ua = navigator.userAgent.toLowerCase();
+    const isAndroid = ua.includes('android');
+    const isIOS = /iphone|ipad|ipod/.test(ua);
+
+    try {
+      if (isAndroid) {
+        // Try Android Gmail app first
+        const gmailAppUrl = `intent://compose?to=${profile.email}#Intent;scheme=mailto;package=com.google.android.gm;S.browser_fallback_url=https%3A%2F%2Fmail.google.com;end`;
+        window.location.href = gmailAppUrl;
+        
+        // Fallback to mailto after 1 second if Gmail app doesn't open
+        setTimeout(() => {
+          window.location.href = `mailto:${profile.email}`;
+        }, 1500);
+      } else if (isIOS) {
+        // iOS: Open Mail app
+        window.location.href = `mailto:${profile.email}`;
+      } else {
+        // PC/Desktop: Open Gmail web in new tab
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}`, '_blank');
+      }
+    } catch (err) {
+      // Fallback to mailto if anything fails
+      window.location.href = `mailto:${profile.email}`;
+    }
+  };
 
   return (
     <header className="gs-nav">
@@ -70,6 +101,7 @@ export default function Navbar() {
             title={label === "Email" ? profile.email : label}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
+            onClick={label === "Email" ? handleEmailClick : undefined}
           >
             <i dangerouslySetInnerHTML={{ __html: icon }} />
           </a>
