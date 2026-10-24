@@ -29,7 +29,7 @@ const quickLinks = [
   },
   {
     label: "Email",
-    href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}&su=${encodeURIComponent("Hello from your portfolio")}`,
+    href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}`,
     icon: RI.contact,
     className: "email",
     external: true,
